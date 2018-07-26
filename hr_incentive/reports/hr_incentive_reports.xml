@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- QWeb Reports -->
+        <report
+            id="hr_incentive_report"
+            model="hr.incentive.history"
+            string="Detalles Incentivos"
+            report_type="qweb-pdf"
+            name="hr_incentive.report_hr_incentive_detail"
+            file="hr_incentive.report_hr_incentive_detail"
+            attachment_use="True"
+            attachment="('incentive_det_'+(object.name or '').replace(' ','_')+'.pdf')"
+        />
+
+         <report
+            id="hr_incentive_report_employee"
+            model="hr.incentive.history"
+            string="Resumen Incentivos"
+            report_type="qweb-pdf"
+            name="hr_incentive.report_hr_incentive"
+            file="hr_incentive.report_hr_incentive"
+            attachment_use="True"
+            attachment="('incentive_'+(object.name or '').replace(' ','_')+'.pdf')"
+        />
+
+        </data>
+</openerp>

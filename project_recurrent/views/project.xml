@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_project_task_form_inherited" model="ir.ui.view">
+            <field name="name">project.task.form.inherited</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='progress']" position="before">
+                    <field name="typetask"/>
+                    <field name="locomotion" />
+                </xpath>
+
+                <xpath expr="//field[@name='work_ids']/tree/field[@name='user_id']" position="after">
+                   <field name="state"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="project_template_works_form" model="ir.ui.view">
+            <field name="name">Inherit project form : Recurrent</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook[last()]" position="inside">
+                    <page string="Servicios" >
+                            <field colspan="4" nolabel="1"  name="workservice_ids" widget="one2many_list" >
+                                    <tree string="Servicios contratados"  editable="bottom" >
+                                        <field name="name"/>
+                                        <field name="templatework_id"/>
+                                        <field name="date_begin"/>
+                                        <field name="date_end"/>
+                                    </tree>
+                            </field>
+                        </page>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>

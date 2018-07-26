@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+
+      <record model="ir.ui.view" id="partner_view_siva">
+            <field name="name">partner.view.siva</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook[last()]" position="inside">
+                    <page string="SIVA"  attrs="{'invisible':[('is_company','=', False)]}"  >
+                             <group>
+                                  <field name="dbname_siva"/>
+                                  <field name="dominio_siva"/>
+                             </group>
+                             <group>
+                                  <field name="fechaultima" />
+                                  <field name="activo_siva"/>
+                             </group>
+
+
+                             <footer>
+
+                            <button name="action_button_getcompanysiva"
+                                    type="object"
+                                    string="Traer Locales"
+                                    class="oe_highlight" />
+
+                            </footer>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_getcompany_siva" model="ir.actions.server">
+            <field name="name">Traer Locales Siva</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="state">code</field>
+            <field name="code">object.action_button_getcompanysiva()</field>
+        </record>
+
+        <record id="id_getcompany_siva_action_value" model="ir.values">
+            <field name="name">Traer Locales Siva</field>
+            <field name="action_id" ref="action_getcompany_siva"/>
+            <field name="value" eval="'ir.actions.server,' + str(ref('action_getcompany_siva'))"/>
+            <field name="key">action</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="model">res.partner</field>
+            <field name="key2">client_action_multi</field>
+        </record>
+
+
+    </data>
+</openerp>

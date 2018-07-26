@@ -1,0 +1,171 @@
+<openerp>
+    <data>
+
+
+    <record model="ir.ui.view" id="hr_incentive_tree_view">
+            <field name="name">hr.incentive.history.tree</field>
+            <field name="model">hr.incentive.history</field>
+            <field name="arch" type="xml">
+                <tree string="Incentivos por Periodo">
+                    <field name="name"/>
+                    <field name="employee_id" string="Empleado" />
+                    <field name="period_id" string="Periodo"/>
+                    <field name="total_tasks" string="Total Tarea"/>
+                    <field name="total_incentive" string="Total Incentivo"/>
+
+                </tree>
+            </field>
+    </record>
+
+
+     <record id="view_hr_incentive_form" model="ir.ui.view">
+            <field name="name">hr.incentive.history.form</field>
+            <field name="model">hr.incentive.history</field>
+            <field name="arch" type="xml">
+                <form string="Calculo Incentivos por Periodo">
+                    <header>
+                        <button name="action_calculate_incentive" string="Calcular" states="open" type="object" class="oe_highlight" groups="base.group_user"/>
+                        <button name="action_draft" string="Borrador" states="calculate" type="object"  groups="base.group_user"/>
+                        <field name="state" widget="statusbar" statusbar_visible="calculate,open"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name" class="oe_inline"/></h1>
+                        </div>
+                        <group>
+                            <field name="employee_id" string="Empleado"/>
+                            <field name="period_id"   string="Periodo" />
+                        </group>
+                        <group>
+                            <field name="date_calculate" string="Fecha Calculo"/>
+                        </group>
+                                <field colspan="4"  name="taskincentive_ids" widget="one2many_list">
+                                    <tree>
+                                        <field name="name" readonly="1" />
+                                        <field name="date"  readonly="1"  />
+                                        <field name="task_id" readonly="1" />
+                                        <field name="price_contract"  readonly="1"  />
+                                        <field name="commission"  sum="Total Coste" readonly="1"  />
+                                    </tree>
+                                </field>
+                    </sheet>
+                </form>
+            </field>
+     </record>
+
+
+    <record model="ir.ui.view" id="hr_incentive_search_view">
+            <field name="name">hr.incentive.history.search</field>
+            <field name="model">hr.incentive.history</field>
+            <field name="arch" type="xml">
+            <search string="Resumen Icentivos">
+                <group string="Agrupar por">
+                     <filter name="group_by_user_id" string="Usuario"
+                            context="{'group_by': 'employee_id'}"/>
+                    <filter name="group_by_period_id" string="Periodo"
+                            context="{'group_by': 'period_id'}"/>
+              </group>
+
+            </search>
+            </field>
+    </record>
+
+
+
+
+    <record model="ir.actions.act_window" id="action_hr_incentive_history">
+            <field name="name">Resumen Incentivos</field>
+            <field name="res_model">hr.incentive.history</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="hr_incentive_tree_view" />
+    </record>
+
+
+     <menuitem id="menu_hr_incentive"  parent="hr_expense.next_id_49" name="Calculo Incentivos" sequence="30"
+                      action="action_hr_incentive_history"/>
+
+
+        <!-- Configuracion  -->
+
+
+
+        <record model="ir.ui.view" id="hr_incentive_template_tree_view">
+            <field name="name">hr.incentive.template.tree</field>
+            <field name="model">hr.incentive.template</field>
+            <field name="arch" type="xml">
+                <tree string="Incentivos por Periodo">
+                    <field name="name"/>
+                    <field name="employee_id" string="Empleado" />
+
+                </tree>
+            </field>
+    </record>
+
+
+     <record id="view_hr_incentive_template_form" model="ir.ui.view">
+            <field name="name">hr.incentive.template.form</field>
+            <field name="model">hr.incentive.template</field>
+            <field name="arch" type="xml">
+                <form string="Plantilla Conifguracion Incentivos">
+
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name" class="oe_inline"/></h1>
+                        </div>
+                        <group>
+                            <field name="employee_id" string="Empleado"/>
+                            <field name="active"   string="Activo" />
+                        </group>
+
+                                <field colspan="4"  name="hrincetemp_ids" widget="one2many_list">
+                                    <tree editable="bottom">
+                                        <field name="name"  />
+                                        <field name="typetask"  />
+                                        <field name="typdist" />
+                                        <field name="rule"  />
+                                        <field name="incentive"    />
+                                    </tree>
+                                </field>
+
+
+
+
+                    </sheet>
+                </form>
+            </field>
+     </record>
+
+
+    <record model="ir.ui.view" id="hr_incentive_template_search_view">
+            <field name="name">hr.incentive.template.search</field>
+            <field name="model">hr.incentive.template</field>
+            <field name="arch" type="xml">
+            <search string="Resumen Icentivos">
+                <group string="Agrupar por">
+                     <filter name="group_by_user_id" string="Usuario"
+                            context="{'group_by': 'employee_id'}"/>
+              </group>
+
+            </search>
+            </field>
+    </record>
+
+
+
+
+    <record model="ir.actions.act_window" id="action_hr_incentive_template">
+            <field name="name">Plantilla plan Incentivos</field>
+            <field name="res_model">hr.incentive.template</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="hr_incentive_template_tree_view" />
+    </record>
+
+
+     <menuitem id="menu_hr_incentive_template"  parent="hr_expense.next_id_49" name="Plantillas Incentivos" sequence="30"
+                      action="action_hr_incentive_template"/>
+
+
+
+    </data>
+
+</openerp>

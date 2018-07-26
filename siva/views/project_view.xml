@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_project_kanban_siva_inherited" model="ir.ui.view">
+            <field name="name">project.project.kanban.siva.inherited</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[contains(@class, 'oe_kanban_project_list')]" position="inside">
+                    <field name="company_siva_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="project_siva_form" model="ir.ui.view">
+            <field name="name">Inherit project form : Siva</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook[last()]" position="inside">
+                    <page string="SIVA" >
+                             <group>
+                                  <field name="employee_id"/>
+                                  <field name="company_siva_id"/>
+                             </group>
+                              <group>
+                                  <field name="user_siva"/>
+                                  <field name="pass_siva"/>
+                             </group>
+                            <group>
+                            <field colspan="4" nolabel="1"  name="elementos_ids" widget="one2many_list" >
+                                    <tree string="Elementos del Local"  editable="bottom" >
+                                        <field name="product_id"/>
+                                        <field name="name"/>
+                                        <field name="date_install"/>
+                                        <field name="serial"/>
+                                        <field name="cantidad"/>
+                                        <field name="date_baja"/>
+                                    </tree>
+                            </field>
+                            </group>
+                        </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

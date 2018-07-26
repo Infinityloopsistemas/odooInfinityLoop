@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_recurrent_task,project.recurrent.wizard.task user,model_project_recurrent_wizard_task,project.group_project_user,1,1,1,1
+access_siva_project_recurrent_works,project.recurrent.wizard.work user,model_project_recurrent_wizard_work,project.group_project_user,1,1,1,1
+access_project_work_service_manager,project.work.service manager,model_project_work_service,project.group_project_manager,1,1,1,1
+access_project_template_work_manager,project.template.work manager,model_project_template_work,project.group_project_manager,1,1,1,1
+access_project_work_service_user,project.work.service user,model_project_work_service,project.group_project_user,1,0,0,0
+access_project_template_work_user,project.template.work user,model_project_template_work,project.group_project_user,1,0,0,0

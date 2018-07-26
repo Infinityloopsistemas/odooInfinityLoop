@@ -1,0 +1,124 @@
+<openerp>
+    <data>
+
+
+    <record model="ir.ui.view" id="hr_dist_travel_tree_view">
+            <field name="name">hr.dist.travel.tree</field>
+            <field name="model">hr.dist.travel</field>
+            <field name="arch" type="xml">
+                <tree string="Resumen Distancia Periodo">
+                    <field name="employee_id" string="Empleado" />
+                    <field name="period_id" string="Periodo"/>
+                    <field name="total_distance" string="Distancia" />
+                     <field name="total_coste" string="Coste" />
+
+
+                </tree>
+            </field>
+    </record>
+
+
+     <record id="view_hr_dist_travel_form" model="ir.ui.view">
+            <field name="name">hr.dist.travel.form</field>
+            <field name="model">hr.dist.travel</field>
+            <field name="arch" type="xml">
+                <form string="Calculo Distancia">
+                    <header>
+                        <button name="action_calculate_distance" string="Calcular" states="open" type="object" class="oe_highlight" groups="base.group_user"/>
+                        <button name="action_draft" string="Borrador" states="calculate" type="object"  groups="base.group_user"/>
+                        <field name="state" widget="statusbar" statusbar_visible="calculate,open"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name" class="oe_inline"/></h1>
+                        </div>
+                        <group>
+                            <field name="employee_id" string="Empleado"/>
+                            <field name="period_id"   string="Periodo" />
+                        </group>
+                        <group>
+                            <field name="date_calculate" string="Fecha Calculo"/>
+                        </group>
+                                <field colspan="4"  name="disttravel_ids" widget="one2many_list">
+                                    <tree>
+                                        <field name="name" readonly="1" />
+                                        <field name="date"  readonly="1"  />
+                                        <field name="distance_total"  sum="Total Distancia" readonly="1"  />
+                                        <field name="costtravel"  sum="Total Coste" readonly="1"  />
+                                    </tree>
+                                </field>
+                    </sheet>
+                </form>
+            </field>
+     </record>
+
+
+    <record model="ir.ui.view" id="hr_dist_travel_search_view">
+            <field name="name">hr.dist.travel.search</field>
+            <field name="model">hr.dist.travel</field>
+            <field name="arch" type="xml">
+            <search string="Resumen Distancia">
+                <group string="Agrupar por">
+                     <filter name="group_by_user_id" string="Usuario"
+                            context="{'group_by': 'employee_id'}"/>
+                    <filter name="group_by_period_id" string="Periodo"
+                            context="{'group_by': 'period_id'}"/>
+              </group>
+
+            </search>
+            </field>
+    </record>
+
+
+
+
+    <record model="ir.actions.act_window" id="action_hr_dist_travel">
+            <field name="name">Resumen Distancias</field>
+            <field name="res_model">hr.dist.travel</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="hr_dist_travel_tree_view" />
+    </record>
+
+
+     <menuitem id="menu_hr_distance"  parent="hr_expense.next_id_49" name="Calculo Viajes" sequence="20"
+                      action="action_hr_dist_travel"/>
+
+
+        <!-- Configuracion  -->
+
+        <record id="view_hr_dist_travel_config_form" model="ir.ui.view">
+            <field name="name">hr.dist.travel.config.form</field>
+            <field name="model">hr.dist.travel.config</field>
+            <field name="arch" type="xml">
+                <form string="Configuracion Calculo Distancia RRHH">
+                        <h1>
+                            DATOS DE CONFIGURACION PARA CALCULO
+                        </h1>
+                        <group>
+                            <field name="initial_depot_lat"   string="Latitud"/>
+                            <field name="initial_depot_lon"   string="Longitud" />
+                        </group>
+                        <group>
+                            <field name="apikey"/>
+                            <field name="costfuel"/>
+                        </group>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_hr_dist_travel_config">
+            <field name="name">Config Calculo Distancia</field>
+            <field name="res_model">hr.dist.travel.config</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_hr_dist_travel_config_form" />
+    </record>
+
+    <menuitem id="menu_hr_distance_config"  parent="base.menu_config" name="Config Viaje" sequence="20"
+                      action="action_hr_dist_travel_config"/>
+
+
+    </data>
+
+</openerp>

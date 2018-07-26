@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- QWeb Reports -->
+        <report
+            id="hr_kms_report_res_dist"
+            model="hr.dist.travel"
+            string="Resumen Distancia"
+            report_type="qweb-pdf"
+            name="hr_disttravel.report_hr_disttravel"
+            file="hr_disttravel.report_hr_disttravel"
+            attachment_use="True"
+            attachment="('costkms_'+(object.name or '').replace(' ','_')+'.pdf')"
+
+        />
+
+        </data>
+</openerp>

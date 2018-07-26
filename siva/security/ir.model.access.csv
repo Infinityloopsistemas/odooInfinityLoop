@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_siva_company_manager,siva.company manager,model_siva_company,project.group_project_manager,1,1,1,1
+access_siva_projetc_elements_manager,siva.project.elements manager,model_siva_project_elements,project.group_project_manager,1,1,1,1
+
+
